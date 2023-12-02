@@ -2,6 +2,7 @@ const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
 			//Your data structures, A.K.A Entities
+			// aqui vamos a guardar
 		},
 		actions: {
 			//(Arrow) Functions that update the Store
