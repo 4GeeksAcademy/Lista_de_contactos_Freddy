@@ -4,12 +4,16 @@ import PropTypes from "prop-types";
 
 import { Context } from "../store/appContext.js";
 
-export const Modal = props => {
+export const ModalEditar = props => {
 	const [state, setState] = useState({
 		//initialize state here
 	});
 
 	const { actions } = useContext(Context);
+	const [fullName, setFullName] = useState("");
+	const [email, setEmail] = useState("");
+	const [phone, setPhone] = useState("");
+	const [address, setAddress] = useState("");
 	return (
 		<div className="modal" tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
 			<div className="modal-dialog" role="document">
@@ -29,15 +33,55 @@ export const Modal = props => {
 							""
 						)}
 					</div>
-					<div className="modal-body">
-						<p>Warning: unknown consequences after this point... Kidding!</p>
-					</div>
+					<div className="modal-body"></div>
+					<form>
+						<div className="form-group">
+							<label>Full Name</label>
+							<input
+								type="text"
+								value={fullName}
+								onChange={e => setFullName(e.target.value)}
+								className="form-control"
+								placeholder="Full Name"
+							/>
+						</div>
+						<div className="form-group">
+							<label>Email</label>
+							<input
+								type="email"
+								value={email}
+								onChange={e => setEmail(e.target.value)}
+								className="form-control"
+								placeholder="Enter email"
+							/>
+						</div>
+						<div className="form-group">
+							<label>Phone</label>
+							<input
+								type="phone"
+								value={phone}
+								onChange={e => setPhone(e.target.value)}
+								className="form-control"
+								placeholder="Enter phone"
+							/>
+						</div>
+						<div className="form-group">
+							<label>Address</label>
+							<input
+								type="text"
+								value={address}
+								onChange={e => setAddress(e.target.value)}
+								className="form-control"
+								placeholder="Enter address"
+							/>
+						</div>
+					</form>{" "}
 					<div className="modal-footer">
 						<button type="button" className="btn btn-primary">
 							Oh no!
 						</button>
 						<button
-							onClick={() => actions.borrarContacto(props.id)}
+							onClick={() => actions.editarContacto(fullName, email, phone, address, props.id)}
 							type="button"
 							className="btn btn-secondary"
 							data-dismiss="modal">
@@ -53,7 +97,7 @@ export const Modal = props => {
  * Define the data-types for
  * your component's properties
  **/
-Modal.propTypes = {
+ModalEditar.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
@@ -64,7 +108,7 @@ Modal.propTypes = {
  * Define the default values for
  * your component's properties
  **/
-Modal.defaultProps = {
+ModalEditar.defaultProps = {
 	show: false,
 	onClose: null
 };

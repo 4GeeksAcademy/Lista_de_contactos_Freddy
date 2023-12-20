@@ -40,10 +40,51 @@ const getState = ({ getStore, setStore }) => {
 
 			obtenerContactos: () => {
 				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/freddy")
+					.then(response => response.json())
 
-				.then(response => response.json())
+					.then(data => setStore({ contactos: data }))
 
-					.then(data => setStore({contactos:data}))
+					.catch(error => console.log(error));
+			},
+
+			borrarContacto: id => {
+				fetch("https://playground.4geeks.com/apis/fake/contact/" + id, {
+					method: "DELETE",
+
+					headers: { "Content-Type": "application/json" }
+				})
+					// estas son las promesas (Convertir a .JSON), mostrar por consola
+					// y mostrar si hubo errores
+
+					.then(response => response.json())
+
+					.then(data => console.log(data))
+
+					.catch(error => console.log(error));
+			},
+
+			editarContacto: (name, email, phone, address, id) => {
+				let datos = {
+					full_name: name,
+					email: email,
+					agenda_slug: "freddy",
+					address: address,
+					phone: phone
+				};
+				// esta es la URL donde se va hacer el POST(Guardar),
+				// con su respectiva configuración (metodo, tipo de dato y cuerpo)
+
+				fetch("https://playground.4geeks.com/apis/fake/contact/" + id, {
+					method: "PUT",
+					body: JSON.stringify(datos),
+					headers: { "Content-Type": "application/json" }
+				})
+					// estas son las promesas (Convertir a .JSON), mostrar por consola
+					// y mostrar si hubo errores
+
+					.then(response => response.json())
+
+					.then(data => console.log(data))
 
 					.catch(error => console.log(error));
 			}

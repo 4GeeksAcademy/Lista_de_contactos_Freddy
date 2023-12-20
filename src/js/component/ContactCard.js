@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import MikePhoto from "../../img/m101.jpg";
+import propTypes from "prop-types";
 
 export const ContactCard = props => {
 	const [state, setState] = useState({
@@ -16,7 +17,7 @@ export const ContactCard = props => {
 				</div>
 				<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 					<div className=" float-right">
-						<button className="btn">
+						<button className="btn" onClick={() => props.onEdit()}>
 							<i className="fas fa-pencil-alt mr-3" />
 						</button>
 						<button className="btn" onClick={() => props.onDelete()}>
@@ -60,7 +61,8 @@ ContactCard.propTypes = {
 	phone: PropTypes.string,
 	address: PropTypes.string,
 	email: PropTypes.string,
-	id: PropTypes.string
+	id: PropTypes.string,
+	onEdit: propTypes.func
 };
 
 /**
